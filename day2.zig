@@ -2,7 +2,6 @@ const std = @import("std");
 const fmt = @import("std").fmt;
 const print = @import("std").debug.print;
 
-// have to preprocess file and add extra comma at end of file
 const input_file = "./inputs/day2.txt";
 
 fn print_parts(parts: *[1024]u32, len: u32) void {
@@ -29,6 +28,12 @@ pub fn main() !void {
         if (res != null) {
             parts[len] = res.?;
             len += 1;
+        } else {
+            const remove_end = fmt.parseInt(u32, part[0 .. part.len - 1], 10) catch null;
+            if (remove_end != null) {
+                parts[len] = remove_end.?;
+                len += 1;
+            }
         }
     }
 
